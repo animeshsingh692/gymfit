@@ -13,26 +13,33 @@ const ExerciseDetails = () => {
     const [equipmentExercises, setequipmentExercises] = useState([]);
     const { id } = useParams();
     const exerciseDBURL = 'https://exercisedb.p.rapidapi.com/exercises';
-    const youTubeSearchURL = 'https://youtube-search-results.p.rapidapi.com/youtube-search';
+    const youTubeSearchURL = 'https://youtube-search-and-download.p.rapidapi.com/search';
 
     useEffect(() => {
-        const fetchExercisesData = async () => {
-            const exerciseDetailData = await fetchData(`${exerciseDBURL}/exercise/${id}`, exerciseOptions);
-            setExerciseDetail(exerciseDetailData);
+        try {
+            const fetchExercisesData = async () => {
+                const exerciseDetailData = await fetchData(`${exerciseDBURL}/exercise/${id}`, exerciseOptions);
+                setExerciseDetail(exerciseDetailData);
+                const exerciseVideoData = await fetchData(`${youTubeSearchURL}?query=${exerciseDetailData.name}`
+                    , ytSearchOptions)
+                setExerciseVideos(exerciseVideoData?.contents ?? []);
 
-            const exerciseVideoData = await fetchData(`${youTubeSearchURL}?q=${exerciseDetailData.name}`
-                , ytSearchOptions)
-            setExerciseVideos(exerciseVideoData);
+                const targetMuscleExerciseData = await fetchData(`${exerciseDBURL}/target/${exerciseDetailData.target}`
+                    , exerciseOptions);
+                setTargetMuscleExercises(targetMuscleExerciseData);
 
-            const targetMuscleExerciseData = await fetchData(`${exerciseDBURL}/target/${exerciseDetailData.target}`
-                , exerciseOptions);
-            setTargetMuscleExercises(targetMuscleExerciseData);
-
-            const equipmentExerciseData = await fetchData(`${exerciseDBURL}/equipment/${exerciseDetailData.equipment}`
-                , exerciseOptions);
-            setequipmentExercises(equipmentExerciseData);
+                const equipmentExerciseData = await fetchData(`${exerciseDBURL}/equipment/${exerciseDetailData.equipment}`
+                    , exerciseOptions);
+                setequipmentExercises(equipmentExerciseData);
+            }
+            fetchExercisesData();
+        }
+        catch (err) {
+            console.error(err.message)
         }
     }, [id])
+
+
     return (
         <Box>
             <Detail exerciseDetail={exerciseDetail} />
