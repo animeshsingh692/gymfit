@@ -22,7 +22,7 @@ const ExerciseVideos = ({ exerciseVideos, exerciseName }) => {
     return (
         <Box
             sx={{
-                marginTop: { lg: "200px", xs: "20px" },
+                marginTop: { lg: "100px", xs: "20px" },
 
             }}
             p="20px"
@@ -40,18 +40,12 @@ const ExerciseVideos = ({ exerciseVideos, exerciseName }) => {
                 alignItems="center"
                 sx={{
                     flexDirection: { lg: "row" },
+                    gap: { lg: '110px', sm: 0 },
 
                 }}
             >
                 {exerciseVideos?.slice(0, 3).map((item) => (
-                    // <a
-                    //     key={index}
-                    //     className="exercise-video"
-                    //     href={`https://www.youtube.com/watch?v=${item.video.videoId}`}
-                    //     target='_blank'
-                    //     rel='noreferrer'
-                    // >
-                    <div style={{ width: "320px", minHeight: "300px" }} key={item.video.videoId}>
+                    <Box sx={{ width: "320px", height: "auto", contain: 'Stack' }} key={item.video.videoId}>
                         {clickedVideoDetails.source?.length > 0 && clickedId === item.video.videoId ? (
                             <VideoPlayer clickedVideoDetails={clickedVideoDetails} />
                         ) : (
@@ -64,15 +58,14 @@ const ExerciseVideos = ({ exerciseVideos, exerciseName }) => {
                             />
                         )}
                         <Box>
-                            <Typography variant="h5" color="#000">
+                            <Typography variant="h5" color="#000" sx={{ pt: { lg: '10px', sm: '5px' } }}>
                                 {item.video.title}
                             </Typography>
-                            <Typography variant="h6" color="#000">
+                            <Typography variant="h6" color="#000" sx={{ pt: { lg: '5px', sm: '2px' }, mb: { sm: '25px' } }}>
                                 {item.video.channelName}
                             </Typography>
                         </Box>
-                    </div>
-                    // </a>
+                    </Box>
                 ))}
             </Stack>
         </Box>

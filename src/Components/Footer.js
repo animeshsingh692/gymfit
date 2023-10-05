@@ -10,7 +10,7 @@ const Footer = () => {
                     <img src={Logo} alt="logo" width='20px' height='40px' />
                     <Typography variant='h6' pl='20px'>gymfit</Typography>
                 </Stack>
-                <Typography variant='h5' pb='40px' mt='20px'>
+                <Typography variant='h5' pb='40px' mt='10px'>
                     Made with ❤️ by Singh, Animesh
                 </Typography>
             </Stack>
