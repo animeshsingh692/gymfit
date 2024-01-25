@@ -8,6 +8,7 @@
 		"@emotion/styled": "^11.8.1",
 		"@mui/icons-material": "^5.6.1",
 		"@mui/material": "^5.6.1",
+		"gh-pages": "^6.1.1",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"react-horizontal-scrolling-menu": "^2.8.2",
@@ -17,11 +18,11 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"eslintConfig": {
 		"extends": [
